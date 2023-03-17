@@ -11,7 +11,7 @@ twemproxy's read/connection timeout is only 2 seconds, so requests to 3rd server
 
 ### Testing commands
 
-These keys point to servers 1, 2, 3 respectively
+These keys point to servers 1, 2, 3 respectively (based on default hashing function and key distribution)
 ```
 ~/ redis-cli -p 6380 GET "from_redis______1"
 (nil)
