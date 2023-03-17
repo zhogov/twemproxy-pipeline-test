@@ -1,11 +1,15 @@
 # twemproxy timeout testbench
 
-Starts twemproxy pointing to 3 redis servers, 3rd of which has 3 seconds of latency. 
-twemproxy's read/connection timeout is only 2 seconds, so requests to 3rd server are destimed to time out.
-
 ```
 docker compose up
 ```
+
+
+Starts twemproxy pointing to 3 redis servers, 3rd of which has 3 seconds of latency. 
+
+twemproxy's read/connection timeout is only 2 seconds, so requests to 3rd server are destimed to time out.
+
+### Testing commands
 
 These keys point to servers 1, 2, 3 respectively
 ```
