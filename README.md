@@ -1,10 +1,11 @@
-twemproxy pipelining testbench
+# twemproxy timeout testbench
+
+Starts twemproxy pointing to 3 redis servers, 3rd of which has 3 seconds of latency. 
+twemproxy's read/connection timeout is only 2 seconds, so requests to 3rd server are destimed to time out.
 
 ```
 docker compose up
 ```
-
-Starts twemproxy pointing to 3 redis servers, 3rd of which has 3 seconds of latency.
 
 These keys point to servers 1, 2, 3 respectively
 ```
@@ -16,7 +17,7 @@ These keys point to servers 1, 2, 3 respectively
 (error) ERR Operation timed out
 ```
 
-Example of MGET timing out if even single key times out:
+Example of MGET timing out if even a single key times out:
 ```
 ~/ redis-cli -p 6380 MGET "from_redis______1" "from_redis___2" "from_redis_3"
 (error) ERR Operation timed out
