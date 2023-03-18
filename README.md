@@ -11,6 +11,7 @@ twemproxy's read/connection timeout is only 2 seconds, so requests to **2nd** se
 ## Testing commands via direct connection to Redis
 
 The following keys point to servers 1, 2, 3 respectively (based on default hashing function and key distribution)
+
 Let's set values via direct conection to Redis servers. Note significant time that second command takes
 ```
 $ echo 'SET "from_redis______1" "value_from_redis_1"' | nc localhost 44001
