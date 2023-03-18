@@ -12,20 +12,20 @@ twemproxy's read/connection timeout is only 2 seconds, so requests to **2nd** se
 
 The following keys point to servers 1, 2, 3 respectively (based on default hashing function and key distribution)
 
-Let's set values via direct conection to Redis servers. Note significant time that second command takes
+Let's set values via direct conection to Redis servers. Note much time the second command takes.
 ```
-$ echo 'SET "from_redis______1" "value_from_redis_1"' | nc localhost 44001
-+OK
-$ echo 'SET "from_redis___2" "value_from_redis_2"' | nc localhost 44002
-+OK
-$ echo 'SET "from_redis_3" "value_from_redis_3"' | nc localhost 44003
-+OK
+$ redis-cli -p 44001 SET "from_redis_____1" "value from redis 1"
+OK
+$ redis-cli -p 44002 SET "from_redis___2" "value_from_redis_2"
+OK
+$ redis-cli -p 44001 SET "from_redis_3" "value_from_redis_3"
+OK
 ```
 
 ## Testing commands via twemproxy
 
 ### GET
-Second server times out, as expected.
+Single GETs. Second server times out, as expected.
 ```
 $ redis-cli -p 6380 GET "from_redis______1"
 "value_from_redis_1"
