@@ -4,9 +4,15 @@
 docker compose up
 ```
 
-Starts twemproxy pointing to 3 redis servers, **2nd** of which has 3 seconds of latency. 
-
+Starts twemproxy pointing to 3 redis servers, **2nd** of which has 3 seconds of latency.  
 twemproxy's read/connection timeout is only 2 seconds, so requests to **2nd** server are destimed to time out.
+
+twemproxy port: 6380  
+Redis servers' ports: 
+- 44001
+- 44002
+- 44003
+
 
 ## Testing commands via direct connection to Redis
 
@@ -45,6 +51,7 @@ $ redis-cli -p 6380 MGET "from_redis______1" "from_redis___2" "from_redis_3"
 ### Pipeline
 
 [Pipelining in twemproxy is only possible using Redis serialization protocol.](https://github.com/twitter/twemproxy/issues/259)
+
 To pipeline three commands:
 ```
 GET "from_redis______1"
