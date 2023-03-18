@@ -74,7 +74,9 @@ GET
 $12
 from_redis_3
 ```
-Now let's run the pipeline and observe that **twemproxy will wait for its timeout to expire before returning a response from 2nd server**
+Now let's run the pipeline and observe that twemproxy:
+- Returns responses in the same order as requests were ordered
+- Waits for its timeout to expire before returning a response from 2nd server**
 ```
 $ (cat /tmp/redis.txt; sleep 4) | nc localhost 6380
 $18
