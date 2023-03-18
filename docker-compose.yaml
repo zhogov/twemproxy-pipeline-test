@@ -8,19 +8,22 @@ services:
     volumes:
       - ./twemproxy.conf:/etc/nutcracker.conf
     command: nutcracker --verbose=6 -c /etc/nutcracker.conf
-    depends_on:
-      - redis1
-      - redis2
-      - redis3
   redis1:
     image: "redis"
+    ports:
+      - "44001:6379"
     command: redis-server --loglevel verbose 
   redis2:
     image: "redis"
-    command: redis-server --loglevel verbose
-  redis3:
-    image: "redis"
+    ports:
+      - "44002:6379"
     cap_add:
       - NET_ADMIN
     entrypoint: /bin/bash
-    command: -c 'apt update; apt install iproute2 iputils-ping -y; tc qdisc add dev eth0 root netem delay 3000ms && redis-server --loglevel verbose; docker-entrypoint.sh redis-server --loglevel verbose'
+    # Add 3 seconds of timeout, then start Redis
+    command: -c 'apt update; apt install iproute2 iputils-ping -y; tc qdisc add dev eth0 root netem delay 3000ms && redis-server --loglevel verbose'
+  redis3:
+    image: "redis"
+    ports:
+      - "44003:6379"
+    command: redis-server --loglevel verbose
