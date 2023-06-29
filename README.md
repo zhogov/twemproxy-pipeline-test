@@ -83,7 +83,7 @@ from_redis_3
 ```
 **Now let's run the pipeline and observe that twemproxy:**
 - **Returns responses in the same order as requests were received**
-- **If any request gets stuck – twemproxy waits for its twemproxy to expire before returning responses from the rest of requests**
+- **If any request gets stuck – twemproxy waits for its timeout to expire before returning responses from the rest of requests**
 - **That means that Redis clients that have timeout shorter than twemproxy twemproxy won't get the rest of responses, even if they were successful**
 ```
 $ (cat /tmp/redis.txt; sleep 4) | nc localhost 6380
